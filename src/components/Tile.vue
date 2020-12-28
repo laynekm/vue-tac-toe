@@ -41,6 +41,13 @@ export default {
         font-size: 25px;
     }
 
+    @media (hover: none) {
+        .selectable:hover {
+            background-color: transparent;
+            font-size: 0;
+        }
+    }
+
     .playerWin {
         background-color: rgba(50, 168, 82, 0.5);
     }
