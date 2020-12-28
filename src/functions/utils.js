@@ -9,6 +9,18 @@ const rows = [
     [[2, 0], [1, 1], [0, 2]]
 ];
 
+// Time is in ms
+export const formatTime = (time) => {
+    let m = parseInt(time / 6000, 10);
+    let s = parseInt(time / 100, 10) - m * 60;
+    let ms = parseInt(time % 100, 10);
+    s = m > 0 && s < 10 ? '0' + s : s;
+    ms = ms < 10 ? '0' + ms : ms;
+    return m
+        ? m + ':' + s + ':' + ms
+        : s + ':' + ms;
+}
+
 export const hasWinner = (pieces) => {
     for (let i = 0; i < rows.length; i++) {
         let piece1 = pieces[rows[i][0][0]][rows[i][0][1]];
@@ -78,6 +90,7 @@ export const determineComputerMove = (pieces, playerPiece, computerPiece) => {
     }
 
     // If computer has 2/3 in a row, place the third to win
+    // TODO: computer is not playing the 3rd and instead trying to block player - why?
     for (let k = 0; k < rows.length; k++) {
         let indexToPlace = getIndex(rows[k], pieces, computerPiece, 2);
         if (indexToPlace) {

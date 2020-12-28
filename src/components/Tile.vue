@@ -1,5 +1,7 @@
 <template>
-    <div @click="setPiece" :class="['root', {'selectable':selectable}]">
+    <div
+        @click="setPiece"
+        :class="['root', {'selectable':selectable}, {'playerWin':playerWin}, {'computerWin':computerWin}]">
         {{piece}}
     </div>
 </template>
@@ -7,18 +9,18 @@
 <script>
 export default {
     name: 'Tile',
-    props: ['i', 'j', 'piece', 'selectable', 'winner'],
+    props: ['i', 'j', 'piece', 'selectable', 'playerWin', 'computerWin'],
     methods: {
         setPiece() {
             if (this.selectable) {
                 this.$parent.$emit('set-piece', this.i, this.j);
             }
-        }
+        },
     }
 }
 </script>
 
-<style>
+<style scoped>
     .root {
         height: 50px;
         width: 50px;
