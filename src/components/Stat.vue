@@ -1,5 +1,5 @@
 <template>
-    <div class="root">
+    <div class="stat-root">
     <span>{{label}}</span>
     <span>{{value}}</span>
     </div>
@@ -13,8 +13,7 @@ export default {
 </script>
 
 <style scoped>
-  .root {
-    width: 5em;
+  .stat-root {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
