@@ -10,13 +10,13 @@
         v-on:set-piece="playerMove"
       />
       <div class="column">
-        <div id="timer" class="timer">0:00</div>
+        <div id="timer" class="timer">{{time}}</div>
         <Stat label="Rounds" :value="roundCounter" />
         <Stat label="Wins" :value="winCounter" />
         <Stat label="Losses" :value="loseCounter" />
       </div>
     </div>
-    <span>
+    <span class="desc">
       Win 10 rounds of tic-tac-toe as fast as you can. If you lose 10 rounds, game over!
     </span>
   </div>
@@ -62,7 +62,7 @@ export default {
         roundCounter: 0,
         winCounter: 0,
         loseCounter: 0,
-        time: '',
+        time: '0.00',
       }
     },
     startTimer() {
@@ -134,7 +134,6 @@ export default {
     },
     resetGame() {
       Object.assign(this.$data, this.initState());
-      document.querySelector('#timer').textContent = '0:00';
     },
   }
 }
@@ -171,5 +170,9 @@ export default {
 
   .timer {
     font-size: 25px;
+  }
+
+  .desc {
+    text-align: center;
   }
 </style>

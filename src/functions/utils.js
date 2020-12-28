@@ -17,8 +17,8 @@ export const formatTime = (time) => {
     s = m > 0 && s < 10 ? '0' + s : s;
     ms = ms < 10 ? '0' + ms : ms;
     return m
-        ? m + ':' + s + ':' + ms
-        : s + ':' + ms;
+        ? m + ':' + s + '.' + ms
+        : s + '.' + ms;
 }
 
 export const hasWinner = (pieces) => {
