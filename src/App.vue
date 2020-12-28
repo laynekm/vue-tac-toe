@@ -35,7 +35,8 @@ import Stat from './components/Stat.vue';
 import GameOver from './components/GameOver.vue';
 import { formatTime, determineComputerMove, hasWinner, boardIsFull } from './functions/utils';
 
-const delay = 1000;
+const turnDelay = 500;
+const roundDelay = 1000;
 const rounds = 10;
 
 export default {
@@ -92,16 +93,19 @@ export default {
     },
     computerMove() {
       this.isPlayerTurn = false;
-      this.pieces = determineComputerMove(this.pieces, this.playerPiece, this.computerPiece);
-      const winningPieces = hasWinner(this.pieces);
+      
+      setTimeout(() => {
+        this.pieces = determineComputerMove(this.pieces, this.playerPiece, this.computerPiece);
+        const winningPieces = hasWinner(this.pieces);
 
-      if (winningPieces.length > 0) {
-        this.roundOver('computer', winningPieces);
-      } else if (boardIsFull(this.pieces)) {
-        this.roundOver('', []);
-      } else {
-        this.isPlayerTurn = true;
-      }
+        if (winningPieces.length > 0) {
+          this.roundOver('computer', winningPieces);
+        } else if (boardIsFull(this.pieces)) {
+          this.roundOver('', []);
+        } else {
+          this.isPlayerTurn = true;
+        }
+      }, turnDelay)
     },
     roundOver(winner, winningPieces) {
       this.isPlayerTurn = false;
@@ -110,7 +114,7 @@ export default {
 
       setTimeout(() => {
         this.resetRound();
-      }, delay);
+      }, roundDelay);
     },
     resetRound() {
       this.roundCounter++;
