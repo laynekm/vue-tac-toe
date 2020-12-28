@@ -25,6 +25,7 @@ export default {
     display: flex;
     flex-direction: column;
     text-align: center;
+    margin: 2em;
   }
 
   .gameover-button {

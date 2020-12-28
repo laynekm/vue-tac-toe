@@ -1,19 +1,24 @@
 <template>
   <div v-if="!isGameOver" class="app-root">
-    <Board
-      :pieces="pieces"
-      :winningPieces="winningPieces"
-      :playerPiece="playerPiece"
-      :isPlayerTurn="isPlayerTurn"
-      :winner="winner"
-      v-on:set-piece="playerMove"
-    />
-    <div class="column">
-      <div id="timer" class="timer">0:00</div>
-      <Stat label="Rounds" :value="roundCounter" />
-      <Stat label="Wins" :value="winCounter" />
-      <Stat label="Losses" :value="loseCounter" />
+    <div class="row">
+      <Board
+        :pieces="pieces"
+        :winningPieces="winningPieces"
+        :playerPiece="playerPiece"
+        :isPlayerTurn="isPlayerTurn"
+        :winner="winner"
+        v-on:set-piece="playerMove"
+      />
+      <div class="column">
+        <div id="timer" class="timer">0:00</div>
+        <Stat label="Rounds" :value="roundCounter" />
+        <Stat label="Wins" :value="winCounter" />
+        <Stat label="Losses" :value="loseCounter" />
+      </div>
     </div>
+    <span>
+      Win 10 rounds of tic-tac-toe as fast as you can. If you lose 10 rounds, game over!
+    </span>
   </div>
   <div v-if="isGameOver" class="app-root">
     <GameOver
@@ -31,7 +36,7 @@ import GameOver from './components/GameOver.vue';
 import { formatTime, determineComputerMove, hasWinner, boardIsFull } from './functions/utils';
 
 const delay = 1000;
-const rounds = 1;
+const rounds = 10;
 
 export default {
   name: 'App',
@@ -129,6 +134,7 @@ export default {
     },
     resetGame() {
       Object.assign(this.$data, this.initState());
+      document.querySelector('#timer').textContent = '0:00';
     },
   }
 }
@@ -145,9 +151,15 @@ export default {
 <style scoped>
   .app-root {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .row {
+    display: flex;
     flex-direction: row;
     justify-content: center;
-    margin-top: 2em;
+    margin: 2em;
   }
 
   .column {
