@@ -1,5 +1,8 @@
 # vue-tac-toe
 
+## Play game
+https://laynekm.github.io/vue-tac-toe
+
 ## Project setup
 ```
 npm install
